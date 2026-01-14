@@ -21,8 +21,8 @@ const UserService = {
     return api.get(`/user`);
   },
 
-  deleteUser: (id: string) => {
-    return api.delete(`/user/${id}`);
+  deleteUser: async (id: string) => {
+    return await api.delete(`/user/${id}`);
   },
 };
 

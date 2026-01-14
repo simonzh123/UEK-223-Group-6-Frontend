@@ -6,7 +6,7 @@ import UserService from "./UserService";
 
 const ListService = {
   getList: async (listID: string): Promise<List> => {
-    const response = await api.get(`/list/${listID}`) as ListDTO;
+    const response = await api.get(`/list-entries/${listID}`) as ListDTO;
     const data: List = {
       id: response.id,
       title: response.title,
@@ -19,18 +19,18 @@ const ListService = {
   },
 
   updateList: (list: List) => {
-    return api.put(`/list/${list.id}`, list);
+    return api.put(`/list-entries/${list.id}`, list);
   },
 
   addList: (list: List) => {
-    return api.post("/list", list).then((res) => {
+    return api.post("/list-entries", list).then((res) => {
       return res.data;
     });
   },
 
   getAllLists: async () => {
-    const response = await api.get(`/list`) as ListDTO[];
-    const data: List[] = response.map((listElement) => {
+    const response = await api.get(`/list-entries`);
+    const data: List[] = (response.data as ListDTO[]).map((listElement) => {
       return {
         id: listElement.id,
         title: listElement.title,
@@ -45,7 +45,7 @@ const ListService = {
   },
 
   deleteList: (id: string) => {
-    return api.delete(`/list/${id}`);
+    return api.delete(`/list-entries/${id}`);
   },
 };
 

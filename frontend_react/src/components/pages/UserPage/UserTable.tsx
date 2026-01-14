@@ -25,8 +25,8 @@ const UserTable = () => {
     navigate('../user/edit/' + id);
   };
 
-  const handleDelete = (id: string) => {
-    UserService.deleteUser(id);
+  const handleDelete = async (id: string) => {
+    await UserService.deleteUser(id);
     window.location.reload()
   };
 
