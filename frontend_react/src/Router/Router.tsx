@@ -4,6 +4,7 @@ import RegistrationPage from '../components/pages/RegistrationPage/RegistrationP
 import PrivateRoute from './PrivateRoute';
 import HomePage from '../components/pages/HomePage';
 import UserTable from '../components/pages/UserPage/UserTable';
+import ListTable from '../components/pages/ListPage/ListTable';
 import UserPage from '../components/pages/UserPage/UserPage';
 import authorities from '../config/Authorities';
 
@@ -24,6 +25,10 @@ const Router = () => {
       <Route
         path={'/user'}
         element={<PrivateRoute requiredAuths={[]} element={<UserTable />} />}
+      />
+      <Route
+        path={'/list'}
+        element={<PrivateRoute requiredAuths={[]} element={<ListTable />} />}
       />
       <Route
         path='/user/edit'
