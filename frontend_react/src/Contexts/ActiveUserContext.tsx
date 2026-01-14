@@ -22,6 +22,7 @@ export const TOKEN_LOCAL_STORAGE_KEY = "token";
 export type ActiveUserContextType = {
   user: Nullable<User>;
   login: (email: string, password: string) => Promise<boolean>;
+  register: (firstName: string, lastName: string, email: string, password: string) => Promise<boolean>;
   logout: () => void;
   setActiveUser: (user: User) => void;
   loadActiveUser: () => void;
@@ -42,6 +43,7 @@ const noContextProviderFound = () => {
 const defaultContextValue: ActiveUserContextType = {
   user: null,
   login: noContextProviderFound,
+  register: noContextProviderFound,
   logout: noContextProviderFound,
   setActiveUser: noContextProviderFound,
   loadActiveUser: noContextProviderFound,
@@ -170,6 +172,32 @@ export const ActiveUserContextProvider = ({
   };
 
   /**
+   * Register with the provided user data. If successful the new user gets
+   * created and stored inside the context. Also the JWT-Token for further
+   * request based authentication is stored inside the localStorage.
+   * @param firstName
+   * @param email
+   * @param password
+   */
+  const register = async (firstName: string, lastName: string, email: string, password: string): Promise<boolean> => {
+    try {
+      const responseRegistration: any = await api.post("user/register", { firstName, lastName, email, password });
+      const responseLogin : any = await login(email, password);
+
+      return true;
+    } catch (error) {
+      // Ensure we don't keep partial/invalid auth state
+      AuthorityService.clearAuthorities();
+      // Do not clear the whole storage to avoid nuking other app data
+      localStorage.removeItem(TOKEN_LOCAL_STORAGE_KEY);
+      localStorage.removeItem(USER_DATA_LOCAL_STORAGE_KEY);
+      setUser(null);
+      // Rethrow so callers can handle (e.g., show error)
+      throw error;
+    }
+  };
+
+  /**
    * Request the user data for the currently active user from the api
    * and save it to the context-state.
    */
@@ -233,6 +261,7 @@ export const ActiveUserContextProvider = ({
           user,
           setActiveUser,
           login,
+          register,
           logout,
           loadActiveUser,
           checkRole: activeUserHasRole,

@@ -35,14 +35,14 @@ const Registration = () => {
   };
   const btnstyle = { margin: "8px 0" };
   const navigate = useNavigate();
-  const { login, logout } = useContext(ActiveUserContext);
+  const { register, logout } = useContext(ActiveUserContext);
 
   useEffect(() => {
     logout();
   }, []);
 
-  const handleSubmit = (values: { email: string; password: string }) => {
-    login(values.email.toLowerCase(), values.password)
+  const handleSubmit = (values: { firstName: string, lastName: string, email: string; password: string }) => {
+    register(values.firstName.trim(), values.lastName.trim(), values.email.toLowerCase(), values.password.trim())
       .then(() => {
         console.log(values);
         navigate("/user");
@@ -64,9 +64,6 @@ const Registration = () => {
       <Paper elevation={10} style={paperStyle}>
         <Grid>
           <h2>Sign Up</h2>
-          <p>Default login:</p>
-          <p>email: user@example.com</p>
-          <p>pw: 1234</p>
         </Grid>
 
         <Formik
