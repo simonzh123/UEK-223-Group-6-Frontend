@@ -1,13 +1,10 @@
 import api from "../config/Api";
-import { List } from "../types/models/List.model";
-import { ListDTO } from "../types/models/List.model";
-import { Importance } from "../types/models/List.model";
-import UserService from "./UserService";
+import {Importance, List, ListDTO} from "../types/models/List.model";
 
 const ListService = {
   getList: async (listID: string): Promise<List> => {
     const response = await api.get(`/list-entries/${listID}`);
-    const data: List = {
+    return {
       id: response.data.id,
       title: response.data.title,
       text: response.data.text,
@@ -15,7 +12,6 @@ const ListService = {
       createdAt: new Date(response.data.createdAt),
       user: response.data.user,
     };
-    return data;
   },
 
   updateList: (list: List) => {
@@ -37,7 +33,6 @@ const ListService = {
         text: listElement.text,
         importance:
           Importance[listElement.importance as keyof typeof Importance],
-        createdAt: new Date(listElement.createdAt),
         user: listElement.user,
       } as List;
     });
@@ -53,7 +48,6 @@ const ListService = {
         text: listElement.text,
         importance:
           Importance[listElement.importance as keyof typeof Importance],
-        createdAt: new Date(listElement.createdAt),
         user: listElement.user,
       } as List;
     });
