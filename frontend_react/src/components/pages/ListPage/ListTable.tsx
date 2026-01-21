@@ -45,7 +45,9 @@ const ListTable = () => {
 
   return (
     <>
-      <Link href="/user">To User Page</Link>
+      <Link id="linkToHome" href="/">
+        To the Homepage
+      </Link>
       {"  "}
       {isAdmin(activeUser) ? <Link href="/admin">To Admin Page</Link> : <></>}
       {lists.map((list) => (

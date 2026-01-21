@@ -11,8 +11,8 @@ import ListService from "../../../Services/ListService";
 import UserService from "../../../Services/UserService";
 import { useNavigate } from "react-router-dom";
 import Link from "@mui/material/Link";
-import AdminListEntry from "../../molecules/AdminListEntry"
-import AdminUserEntry from "../../molecules/AdminUserEntry"
+import AdminListEntry from "../../molecules/AdminListEntry";
+import AdminUserEntry from "../../molecules/AdminUserEntry";
 
 const AdminListTable = () => {
   const navigate = useNavigate();
@@ -54,7 +54,10 @@ const AdminListTable = () => {
           checked={showList}
           onChange={(e) => handleShowListChange(!showList)}
         />
-        show List Entries <Link href="/list">To the List</Link>
+        show List Entries{" "}
+        <Link id="linkToHome" href="/">
+          To the Homepage
+        </Link>
         {lists.map((list) => (
           <div key={list.id}>
             <AdminListEntry list={list} handleDelete={handleDelete} />

@@ -33,8 +33,8 @@ const UserTable = () => {
 
   return (
     <>
-      <Link id="linkToList" href="/list">
-        To the List
+      <Link id="linkToHome" href="/">
+        To the Homepage
       </Link>
       <div key={user.id}>
         <UserEntry
