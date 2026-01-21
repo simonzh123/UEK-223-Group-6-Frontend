@@ -20,24 +20,6 @@ const AuthorityService = {
 
     return authoritySet.has(authority);
   },
-  hasAuthorities: (authorities: authorities[]) => {
-    AuthorityService.initAuthoritySet();
-
-    for (const element of authorities) {
-      if (!authoritySet.has(element)) {
-        return false;
-      }
-    }
-    return true;
-  },
-  hasAnyAuthority: (authorities: authorities[]) => {
-    for (const element of authorities) {
-      if (authoritySet.has(element)) {
-        return true;
-      }
-    }
-    return false;
-  },
   clearAuthorities: (): void => {
     authoritySet.clear();
   },

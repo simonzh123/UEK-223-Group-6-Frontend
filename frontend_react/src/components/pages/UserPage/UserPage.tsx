@@ -26,15 +26,15 @@ const UserPage = () => {
   }, [userId]);
 
   const submitActionHandler = async (values: User) => {
-    if (userId !== undefined) {
-      await UserService.updateUser(values).then(() => {
-        navigate(("../" + previousPage) as string);
-        alert("Your user profile got updated!");
+    if (userId === undefined) {
+      await UserService.addUser(values).then(() => {
+        navigate(("/" + previousPage));
+        alert("You added a new user!");
       });
     } else {
-      await UserService.addUser(values).then(() => {
-        navigate(("/" + previousPage) as string);
-        alert("You added a new user!");
+      await UserService.updateUser(values).then(() => {
+        navigate(("../" + previousPage));
+        alert("Your user profile got updated!");
       });
     }
   };

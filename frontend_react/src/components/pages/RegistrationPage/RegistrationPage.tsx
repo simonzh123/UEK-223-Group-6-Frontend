@@ -28,7 +28,7 @@ const validationSchema = Yup.object().shape({
     }),
   passwordConfirmation: Yup.string()
     .required("**Required**")
-    .oneOf([Yup.ref("password"), null], "Passwords must match"),
+    .oneOf([Yup.ref("password")], "Passwords must match"),
 });
 
 const Registration = () => {
@@ -59,12 +59,11 @@ const Registration = () => {
       values.password.trim()
     )
       .then(() => {
-        console.log(values);
         navigate("/user");
       })
       .catch((error) => {
         if (
-          (typeof error.response !== "undefined" &&
+          (error.response !== "undefined" &&
             error.response.status === 401) ||
           error.response.status === 403
         ) {

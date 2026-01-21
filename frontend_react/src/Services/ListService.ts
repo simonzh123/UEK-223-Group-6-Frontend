@@ -18,10 +18,14 @@ const ListService = {
     return api.put(`/list-entries/${list.id}`, list);
   },
 
-  addList: (list: List) => {
-    return api.post("/list-entries", {title: list.title, text: list.text, importance: list.importance, user: list.user }).then((res) => {
-      return res.data;
+  addList: async (list: List) => {
+    const res = await api.post("/list-entries", {
+      title: list.title,
+      text: list.text,
+      importance: list.importance,
+      user: list.user
     });
+    return res.data;
   },
 
   getAllLists: async () => {

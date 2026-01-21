@@ -1,6 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { List } from "../../../types/models/List.model";
-import { Importance } from "../../../types/models/List.model";
+import { List, Importance } from "../../../types/models/List.model";
 import ListService from "../../../Services/ListService";
 import ListForm from "../../molecules/ListForm/ListForm";
 import { useContext, useEffect, useState } from "react";
@@ -32,12 +31,12 @@ const ListPage = () => {
   const submitActionHandler = async (values: List) => {
     if (listEntryId !== undefined && listEntryId !== "") {
       await ListService.updateList(values).then(() => {
-        navigate(("../" + previousPage) as string);
+        navigate(("../" + previousPage));
         alert("Your list entry got updated!");
       });
     } else {
       await ListService.addList(values).then(() => {
-        navigate(("/" + previousPage) as string);
+        navigate(("/" + previousPage));
         alert("You added a new list entry!");
       });
     }

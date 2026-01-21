@@ -19,44 +19,42 @@ const UserEntry = ({ user, handleDelete }: ListEntryProps) => {
   };
 
   return (
-    <>
-      <Card sx={{ minWidth: 275 }}>
-              <CardContent>
-                {user.firstName} {user.lastName} {user.email}
-                <CardActions>
+      <Card sx={{minWidth: 275}}>
+          <CardContent>
+              {user.firstName} {user.lastName} {user.email}
+              <CardActions>
                   {isDeleting ? (
-                    <>
-                      <Button
-                        size="small"
-                        color="info"
-                        variant="contained"
-                        onClick={() => handleDeleteChange()}
-                      >
-                        Cancel
-                      </Button>
-                      <Button
-                        size="small"
-                        color="error"
-                        variant="contained"
-                        onClick={async () => await handleDelete(user.id)}
-                      >
-                        Confirm Delete
-                      </Button>
-                    </>
+                      <>
+                          <Button
+                              size="small"
+                              color="info"
+                              variant="contained"
+                              onClick={() => handleDeleteChange()}
+                          >
+                              Cancel
+                          </Button>
+                          <Button
+                              size="small"
+                              color="error"
+                              variant="contained"
+                              onClick={async () => await handleDelete(user.id)}
+                          >
+                              Confirm Delete
+                          </Button>
+                      </>
                   ) : (
-                    <Button
-                      size="small"
-                      color="error"
-                      variant="contained"
-                      onClick={() => handleDeleteChange()}
-                    >
-                      Delete
-                    </Button>
+                      <Button
+                          size="small"
+                          color="error"
+                          variant="contained"
+                          onClick={() => handleDeleteChange()}
+                      >
+                          Delete
+                      </Button>
                   )}
-                </CardActions>
-              </CardContent>
-            </Card>
-    </>
+              </CardActions>
+          </CardContent>
+      </Card>
   );
 };
 

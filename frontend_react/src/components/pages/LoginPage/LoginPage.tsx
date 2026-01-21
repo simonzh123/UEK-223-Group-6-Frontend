@@ -36,12 +36,11 @@ const Login = () => {
   const handleSubmit = (values: { email: string; password: string }) => {
     login(values.email.toLowerCase(), values.password)
       .then(() => {
-        console.log(values);
         navigate("/");
       })
       .catch((error) => {
         if (
-          (typeof error.response !== "undefined" &&
+          (error.response !== "undefined" &&
             error.response.status === 401) ||
           error.response.status === 403
         ) {

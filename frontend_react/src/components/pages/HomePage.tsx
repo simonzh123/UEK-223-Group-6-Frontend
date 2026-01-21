@@ -1,14 +1,12 @@
 import { Box } from "@mui/system";
-import logo from "../../logo1.png";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useState, useContext, useEffect } from "react";
-import { User } from "../../types/models/User.model";
 import ActiveUserContext, {ActiveUserContextType} from "../../Contexts/ActiveUserContext";
 
 export default function HomePage() {
   const navigate = useNavigate();
-  const [isLoggedIn, setLoggedIn] = useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [isAdmin, setIsAdmin] = useState<boolean>(false);
   const activeUser = useContext(ActiveUserContext);
 
@@ -17,7 +15,7 @@ export default function HomePage() {
   };
 
   const checkLoggedIn = (): boolean => {
-    if (activeUser.user != null && activeUser.user.id) {
+    if (activeUser.user?.id) {
       setIsAdmin(checkIsAdmin(activeUser));
       return true;
     }
@@ -25,7 +23,7 @@ export default function HomePage() {
   };
 
   useEffect(() => {
-    setLoggedIn(checkLoggedIn());
+    setIsLoggedIn(checkLoggedIn());
   }, []);
 
   return (
@@ -52,7 +50,7 @@ export default function HomePage() {
       </h1>
       <Box
         component="img"
-        src={logo}
+        src="../../logo1.png"
         alt="logo"
         sx={{
           maxWidth: "350px",

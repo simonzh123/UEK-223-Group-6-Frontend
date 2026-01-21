@@ -11,10 +11,9 @@ const UserService = {
     return api.put(`/user/${user.id}`, user);
   },
 
-  addUser: (user: User) => {
-    return api.post('/user/registerUser', user).then((res) => {
-      return res.data;
-    });
+  addUser: async (user: User) => {
+    const res = await api.post('/user/registerUser', user);
+    return res.data;
   },
 
   getAllUsers: () => {

@@ -33,73 +33,71 @@ const UserForm = ({ user, submitActionHandler, previousPage }: UserProps) => {
   });
 
   return (
-    <>
       <form onSubmit={formik.handleSubmit}>
-        <Box sx={{ paddingTop: '15px' }}>
+        <Box sx={{paddingTop: '15px'}}>
           <TextField
-            id='firstName'
-            label='Firstname'
-            variant='outlined'
-            sx={{ paddingRight: '10px' }}
-            onBlur={formik.handleBlur}
-            onChange={formik.handleChange}
-            error={Boolean(formik.touched.firstName && formik.errors.firstName)}
-            value={formik.values.firstName}
+              id='firstName'
+              label='Firstname'
+              variant='outlined'
+              sx={{paddingRight: '10px'}}
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              error={Boolean(formik.touched.firstName && formik.errors.firstName)}
+              value={formik.values.firstName}
           />
           {formik.errors.firstName && formik.touched.firstName ? (
-            <div style={{ color: 'red' }}>{formik.errors.firstName}</div>
+              <div style={{color: 'red'}}>{formik.errors.firstName}</div>
           ) : null}
           <TextField
-            id='lastName'
-            label='Lastname'
-            variant='outlined'
-            sx={{ paddingRight: '10px' }}
-            onBlur={formik.handleBlur}
-            onChange={formik.handleChange}
-            error={Boolean(formik.touched.lastName && formik.errors.lastName)}
-            value={formik.values.lastName}
+              id='lastName'
+              label='Lastname'
+              variant='outlined'
+              sx={{paddingRight: '10px'}}
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              error={Boolean(formik.touched.lastName && formik.errors.lastName)}
+              value={formik.values.lastName}
           />
           {formik.errors.lastName && formik.touched.lastName ? (
-            <div style={{ color: 'red' }}>{formik.errors.lastName}</div>
+              <div style={{color: 'red'}}>{formik.errors.lastName}</div>
           ) : null}
           <TextField
-            id='email'
-            label='E-Mail'
-            variant='outlined'
-            onBlur={formik.handleBlur}
-            onChange={formik.handleChange}
-            error={Boolean(formik.touched.email && formik.errors.email)}
-            value={formik.values.email}
+              id='email'
+              label='E-Mail'
+              variant='outlined'
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              error={Boolean(formik.touched.email && formik.errors.email)}
+              value={formik.values.email}
           />
 
           {formik.errors.email && formik.touched.email ? (
-            <div style={{ color: 'red' }}>{formik.errors.email}</div>
+              <div style={{color: 'red'}}>{formik.errors.email}</div>
           ) : null}
         </Box>
         <div>
           <Button
-            sx={{ marginTop: '15px', marginRight: '10px' }}
-            variant='contained'
-            color='success'
-            type='submit'
-            disabled={!(formik.dirty && formik.isValid)}
+              sx={{marginTop: '15px', marginRight: '10px'}}
+              variant='contained'
+              color='success'
+              type='submit'
+              disabled={!(formik.dirty && formik.isValid)}
           >
             {user.id && 'Save'}
             {!user.id && 'Add'}
           </Button>
           <Button
-            sx={{ marginTop: '15px' }}
-            variant='contained'
-            color='error'
-            onClick={() => {
-              navigate("/" + previousPage);
-            }}
+              sx={{marginTop: '15px'}}
+              variant='contained'
+              color='error'
+              onClick={() => {
+                navigate("/" + previousPage);
+              }}
           >
             Cancel
           </Button>
         </div>
       </form>
-    </>
   );
 };
 

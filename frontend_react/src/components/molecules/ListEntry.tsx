@@ -19,57 +19,55 @@ const ListEntry = ({ list, handleDelete, handleEdit }: ListEntryProps) => {
   };
 
   return (
-    <>
-      <Card sx={{ minWidth: 275 }}>
-        <CardContent sx={{ borderBottom: "1px solid" }}>
-          Author: {list.user.firstName} {list.user.lastName} <br />
-          Priority: {Importance[list.importance]} <br /> {list.title} <br />
-          -------------------------------------- <br />
+      <Card sx={{minWidth: 275}}>
+        <CardContent sx={{borderBottom: "1px solid"}}>
+          Author: {list.user.firstName} {list.user.lastName} <br/>
+          Priority: {Importance[list.importance]} <br/> {list.title} <br/>
+          -------------------------------------- <br/>
           {list.text}
-          <br />
-          <br />
+          <br/>
+          <br/>
           <CardActions>
             {isDeleting ? (
-              <>
-                <Button
-                  size="small"
-                  color="info"
-                  variant="contained"
-                  onClick={() => handleDeleteChange()}
-                >
-                  Cancel
-                </Button>
-                <Button
-                  size="small"
-                  color="error"
-                  variant="contained"
-                  onClick={async () => await handleDelete(list.id)}
-                >
-                  Confirm Delete
-                </Button>
-              </>
+                <>
+                  <Button
+                      size="small"
+                      color="info"
+                      variant="contained"
+                      onClick={() => handleDeleteChange()}
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                      size="small"
+                      color="error"
+                      variant="contained"
+                      onClick={async () => await handleDelete(list.id)}
+                  >
+                    Confirm Delete
+                  </Button>
+                </>
             ) : (
-              <Button
-                size="small"
-                color="error"
-                variant="contained"
-                onClick={() => handleDeleteChange()}
-              >
-                Delete
-              </Button>
+                <Button
+                    size="small"
+                    color="error"
+                    variant="contained"
+                    onClick={() => handleDeleteChange()}
+                >
+                  Delete
+                </Button>
             )}
             <Button
-              size="small"
-              color="primary"
-              variant="contained"
-              onClick={() => handleEdit(list.id)}
+                size="small"
+                color="primary"
+                variant="contained"
+                onClick={() => handleEdit(list.id)}
             >
               Edit
             </Button>
           </CardActions>
         </CardContent>
       </Card>
-    </>
   );
 };
 

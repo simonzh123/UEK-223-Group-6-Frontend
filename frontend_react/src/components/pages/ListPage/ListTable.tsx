@@ -1,23 +1,13 @@
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
-import { List, Importance } from "../../../types/models/List.model";
-import { User } from "../../../types/models/User.model";
-import roles from "../../../config/Roles";
+import { List } from "../../../types/models/List.model";
 import ListService from "../../../Services/ListService";
-import Link from "@mui/material/Link";
 import { useNavigate } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
-import ActiveUserContext, {
-  ActiveUserContextType,
-} from "../../../Contexts/ActiveUserContext";
+import { useEffect, useState } from "react";
 import ListEntry from "../../molecules/ListEntry";
 
 const ListTable = () => {
   const navigate = useNavigate();
   const [lists, setLists] = useState<List[]>([]);
-  const activeUser = useContext(ActiveUserContext);
 
   useEffect(() => {
     ListService.getAllLists().then((data) => {
@@ -35,7 +25,7 @@ const ListTable = () => {
 
   const handleDelete = async (id: string) => {
     await ListService.deleteList(id);
-    window.location.reload();
+      globalThis.location.reload();
     alert("You deleted you list entry!");
   };
 

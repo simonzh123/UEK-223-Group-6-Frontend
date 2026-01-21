@@ -1,16 +1,9 @@
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
-import Link from "@mui/material/Link";
-import { useEffect, useState, useContext } from "react";
+import { useContext } from "react";
 import { User } from "../../../types/models/User.model";
 import UserService from "../../../Services/UserService";
 import { useNavigate } from "react-router-dom";
-import roles from "../../../config/Roles";
-import ActiveUserContext, {
-  ActiveUserContextType,
-} from "../../../Contexts/ActiveUserContext";
+import ActiveUserContext from "../../../Contexts/ActiveUserContext";
 import UserEntry from "../../molecules/UserEntry";
 
 const UserTable = () => {
@@ -27,7 +20,7 @@ const UserTable = () => {
 
   const handleDelete = async (id: string) => {
     await UserService.deleteUser(id);
-    window.location.reload();
+      globalThis.location.reload();
     alert("You deleted your user profile!");
   };
 
