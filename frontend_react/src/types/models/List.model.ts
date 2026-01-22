@@ -27,5 +27,4 @@ export enum Importance {
 export enum SortByListCategories {
   DATE = "DATE",
   IMPORTANCE = "IMPORTANCE",
-  USER = "USER",
 }

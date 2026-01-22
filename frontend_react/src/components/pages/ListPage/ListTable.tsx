@@ -12,7 +12,6 @@ const ListTable = () => {
 
   const [filterValue, setFilterValue] = useState<string>();
   const [sortValue, setSortValue] = useState<SortByListCategories>();
-  const [userFilterValue, setUserFilterValue] = useState<string>();
   const [page, setPage] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [isAscending, setIsAscending] = useState<boolean>(true);
@@ -20,7 +19,6 @@ const ListTable = () => {
   const loadLists = async (
     importance?: string,
     sortBy?: string,
-    userId?: string,
     asc?: boolean,
   ) => {
     const params: any = {};
@@ -32,30 +30,28 @@ const ListTable = () => {
       };
       params.sortBy = SORT_FIELD_MAP[sortBy] || sortBy;
     }
-    if (userId) params.userId = userId;
     if (asc !== undefined) params.isAscending = asc;
       const data = await ListService.getAllLists(page, params);
       setLists(data);
   };
 
   useEffect(() => {
-    loadLists(undefined, undefined, undefined, isAscending);
+    loadLists(undefined, undefined, isAscending);
   }, []);
   useEffect(() => {
     ListService.getAllListsPagesCount().then((count) => {
       setTotalPages(count);
     });
-    loadLists(undefined, undefined, undefined, isAscending);
+    loadLists(undefined, undefined, isAscending);
   }, []);
 
   useEffect(() => {
     loadLists(
       filterValue || undefined,
       sortValue || undefined,
-      userFilterValue || undefined,
       isAscending,
     );
-  }, [filterValue, sortValue, userFilterValue, isAscending, page]);
+  }, [filterValue, sortValue, isAscending, page]);
 
   const handleAdd = () => {
     navigate("../list/edit/list");
@@ -90,8 +86,6 @@ const ListTable = () => {
             sortValue={sortValue}
             onFilterChange={setFilterValue}
             onSortChange={setSortValue}
-            userFilterValue={userFilterValue}
-            onUserFilterChange={setUserFilterValue}
             isAdmin={false}
             isAscending={isAscending}
             onIsAscendingChange={() => setIsAscending(!isAscending)}
