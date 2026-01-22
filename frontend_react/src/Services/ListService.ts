@@ -20,13 +20,17 @@ const ListService = {
     return api.put(`/list-entries/${list.id}`, list);
   },
 
-  addList: (list: List) => {
-    return api.post("/list-entries", {title: list.title, text: list.text, importance: list.importance, user: list.user }).then((res) => {
+  addList: async (list: List) => {
+      const res = await api.post("/list-entries", {
+          title: list.title,
+          text: list.text,
+          importance: list.importance,
+          user: list.user
+      });
       return res.data;
-    });
   },
 
-  getAllLists: async (page = 0, params?: { importance?: string; sortBy?: string; userId?: string; isAscending?: boolean }) => {
+  getAllLists: async (page = 0, params?: { importance?: string; sortBy?: string; isAscending?: boolean }) => {
     const response = await api.get(`/list-entries/user?page=${page}`, { params });
     return (response.data as ListDTO[]).map((listElement) => ({
       id: listElement.id,
