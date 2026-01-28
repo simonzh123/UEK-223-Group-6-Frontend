@@ -1,6 +1,9 @@
 name: CI
 
-on: [push]
+on: 
+push:
+  branches:
+    - main
 
 jobs:
   build:
@@ -10,6 +13,6 @@ jobs:
       - name: Set up Docker
         uses: docker/setup-buildx-action@v2
       - name: Build Docker Image
-        run: docker build -t michel2306/list-frontend:1.0 .
+        run: docker build -t michelm2306/list-frontend:1.0 .
       - name: Push Docker Image
-        run: docker push michel2306/list-frontend:1.0
+        run: docker push michelm2306/list-frontend:1.0
